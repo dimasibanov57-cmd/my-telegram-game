@@ -8,74 +8,75 @@
 }
 
 body {
-    background: radial-gradient(ellipse at center, #1a0b2e 0%, #0d0d1a 100%);
+    background: radial-gradient(ellipse at top, #0f0c29, #1a0b2e 40%, #0d0d1a 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', Arial, sans-serif;
-    padding: 16px;
+    padding: 12px;
 }
 
 #app {
-    max-width: 380px;
+    max-width: 400px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    border-radius: 40px;
-    padding: 24px 20px 30px;
-    border: 1px solid rgba(255, 215, 0, 0.15);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.05);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    border-radius: 32px;
+    padding: 20px 16px 24px;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(255, 215, 0, 0.03);
 }
 
 /* ===== ШАПКА ===== */
 .header {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
-.balance, .energy {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.06);
-    padding: 12px 16px;
-    border-radius: 16px;
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 18px;
     border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.balance .label, .energy .label {
-    font-size: 14px;
-    color: #aaa;
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: #888;
     font-weight: 600;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-.balance .value {
-    font-size: 22px;
+.stat-value {
+    font-size: 18px;
     font-weight: 800;
     color: #ffd700;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
-.energy .value {
-    font-size: 14px;
-    font-weight: 600;
+.stat-value.small {
+    font-size: 12px;
     color: #7cf9ff;
-    min-width: 60px;
-    text-align: right;
 }
 
-/* Энергетическая шкала */
 .energy-bar {
-    flex: 1;
-    height: 6px;
+    width: 100%;
+    height: 4px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    margin: 0 12px;
     overflow: hidden;
+    margin: 4px 0;
 }
 
 .energy-fill {
@@ -84,47 +85,47 @@ body {
     background: linear-gradient(90deg, #00d4ff, #7cf9ff);
     border-radius: 10px;
     transition: width 0.3s ease;
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
 }
 
-/* ===== МОНЕТКА ===== */
+/* ===== МОНЕТА ===== */
 .coin-wrapper {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0 16px;
+    margin: 6px 0 10px;
     cursor: pointer;
 }
 
 .coin-glow {
     position: absolute;
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
     border-radius: 50%;
-    animation: pulseGlow 2s ease-in-out infinite;
+    animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
 @keyframes pulseGlow {
-    0%, 100% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.2); opacity: 1; }
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.15); opacity: 1; }
 }
 
 #coinImage {
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     position: relative;
     z-index: 2;
     transition: transform 0.08s ease;
-    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+    filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.25));
 }
 
 #coinImage:active {
-    transform: scale(0.88);
+    transform: scale(0.85);
 }
 
-/* ===== АНИМАЦИЯ "ПЛЮСИКОВ" ===== */
+/* ===== ПАРЯЩИЙ ТЕКСТ ===== */
 #floatingTexts {
     position: absolute;
     top: 0;
@@ -137,57 +138,95 @@ body {
 
 .float-text {
     position: absolute;
-    color: #ffd700;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 900;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 4px 15px rgba(0,0,0,0.5);
+    text-shadow: 0 0 25px rgba(255, 215, 0, 0.5), 0 4px 15px rgba(0,0,0,0.5);
     animation: floatUp 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
 }
 
 @keyframes floatUp {
-    0% { opacity: 1; transform: translateY(0) scale(0.8); }
-    100% { opacity: 0; transform: translateY(-120px) scale(1.6); }
+    0% { opacity: 1; transform: translateY(0) scale(0.7); }
+    100% { opacity: 0; transform: translateY(-130px) scale(1.5); }
 }
 
-/* ===== СИЛА ТАПА ===== */
-.tap-power {
-    text-align: center;
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 18px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-}
-
-.tap-power span {
-    color: #ffd700;
-    font-weight: 700;
-    font-size: 18px;
-}
-
-/* ===== МАГАЗИН ===== */
-.shop {
+/* ===== ИНФО О ДОХОДАХ ===== */
+.income-info {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #888;
+    padding: 6px 4px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 12px;
 }
 
+.income-info span {
+    font-weight: 600;
+}
+
+.income-info span:first-child span {
+    color: #7cf9ff;
+}
+
+.income-info span:last-child span {
+    color: #ffd700;
+}
+
+/* ===== ВКЛАДКИ ===== */
+.tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #777;
+    background: rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.tab-btn.active {
+    color: #fff;
+    background: rgba(255, 215, 0, 0.12);
+    border-color: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+}
+
+.tab-panel {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tab-panel.active {
+    display: flex;
+}
+
+/* ===== КНОПКИ МАГАЗИНА ===== */
 .shop-btn {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 16px 18px;
+    padding: 14px 16px;
     border: none;
-    border-radius: 18px;
-    font-size: 16px;
+    border-radius: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: #fff;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     cursor: pointer;
     transition: all 0.15s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    gap: 10px;
 }
 
 .shop-btn:active {
@@ -196,48 +235,48 @@ body {
 
 .shop-btn .icon {
     font-size: 22px;
-    margin-right: 8px;
+    width: 32px;
+    text-align: center;
 }
 
 .shop-btn .text {
     flex: 1;
     text-align: left;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .shop-btn .price {
-    font-size: 14px;
-    background: rgba(255, 215, 0, 0.15);
+    font-size: 13px;
     padding: 4px 14px;
     border-radius: 30px;
-    color: #ffd700;
     font-weight: 700;
+    white-space: nowrap;
 }
 
-/* Кнопки с градиентами */
-.shop-btn.upgrade {
-    background: linear-gradient(135deg, #2a1a4a, #1a0b2e);
-    border-color: rgba(180, 130, 255, 0.2);
-}
+/* Улучшения */
+.shop-btn.upgrade { background: linear-gradient(135deg, #2a1a4a, #1a0b2e); border-color: rgba(180, 130, 255, 0.15); }
 .shop-btn.upgrade .price { background: rgba(180, 130, 255, 0.2); color: #c084fc; }
 
-.shop-btn.mega {
-    background: linear-gradient(135deg, #3a1a2a, #1a0b1e);
-    border-color: rgba(255, 100, 100, 0.2);
-}
+.shop-btn.mega { background: linear-gradient(135deg, #3a1a2a, #1a0b1e); border-color: rgba(255, 100, 100, 0.15); }
 .shop-btn.mega .price { background: rgba(255, 100, 100, 0.2); color: #ff8a8a; }
 
-.shop-btn.energy-btn {
-    background: linear-gradient(135deg, #0a2a3a, #0a1a2a);
-    border-color: rgba(100, 200, 255, 0.2);
-}
-.shop-btn.energy-btn .price { background: rgba(100, 200, 255, 0.2); color: #7cf9ff; }
+.shop-btn.ultra { background: linear-gradient(135deg, #1a2a3a, #0a1a2a); border-color: rgba(100, 200, 255, 0.15); }
+.shop-btn.ultra .price { background: rgba(100, 200, 255, 0.2); color: #7cf9ff; }
+
+/* Бизнес */
+.shop-btn.business { background: linear-gradient(135deg, #1a2a1a, #0a1a0a); border-color: rgba(100, 255, 150, 0.12); }
+.shop-btn.business .price { background: rgba(100, 255, 150, 0.15); color: #6fdf8a; }
+
+/* Бонусы */
+.shop-btn.bonus { background: linear-gradient(135deg, #2a1a2a, #1a0a1a); border-color: rgba(255, 150, 255, 0.12); }
+.shop-btn.bonus .price { background: rgba(255, 150, 255, 0.15); color: #e87ae8; }
 
 /* ===== АДАПТАЦИЯ ===== */
 @media (max-width: 420px) {
-    #app { padding: 16px 14px 20px; }
-    #coinImage { width: 130px; height: 130px; }
-    .coin-glow { width: 180px; height: 180px; }
-    .shop-btn { padding: 14px 14px; font-size: 14px; }
-    .balance .value { font-size: 18px; }
+    #app { padding: 14px 12px 18px; }
+    #coinImage { width: 120px; height: 120px; }
+    .coin-glow { width: 170px; height: 170px; }
+    .stats { grid-template-columns: 1fr 1fr 1fr; padding: 10px; }
+    .stat-value { font-size: 16px; }
+    .shop-btn { padding: 12px 14px; font-size: 14px; }
 }
