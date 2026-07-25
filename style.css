@@ -1,0 +1,243 @@
+/* ===== БАЗА ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: radial-gradient(ellipse at center, #1a0b2e 0%, #0d0d1a 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 16px;
+}
+
+#app {
+    max-width: 380px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 40px;
+    padding: 24px 20px 30px;
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.05);
+}
+
+/* ===== ШАПКА ===== */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.balance, .energy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 12px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.balance .label, .energy .label {
+    font-size: 14px;
+    color: #aaa;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.balance .value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.energy .value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #7cf9ff;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Энергетическая шкала */
+.energy-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 0 12px;
+    overflow: hidden;
+}
+
+.energy-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #00d4ff, #7cf9ff);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+}
+
+/* ===== МОНЕТКА ===== */
+.coin-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 16px;
+    cursor: pointer;
+}
+
+.coin-glow {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+#coinImage {
+    width: 160px;
+    height: 160px;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.08s ease;
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+}
+
+#coinImage:active {
+    transform: scale(0.88);
+}
+
+/* ===== АНИМАЦИЯ "ПЛЮСИКОВ" ===== */
+#floatingTexts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.float-text {
+    position: absolute;
+    color: #ffd700;
+    font-size: 30px;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 4px 15px rgba(0,0,0,0.5);
+    animation: floatUp 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(0.8); }
+    100% { opacity: 0; transform: translateY(-120px) scale(1.6); }
+}
+
+/* ===== СИЛА ТАПА ===== */
+.tap-power {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 18px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.tap-power span {
+    color: #ffd700;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/* ===== МАГАЗИН ===== */
+.shop {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.shop-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border: none;
+    border-radius: 18px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.shop-btn:active {
+    transform: scale(0.96);
+}
+
+.shop-btn .icon {
+    font-size: 22px;
+    margin-right: 8px;
+}
+
+.shop-btn .text {
+    flex: 1;
+    text-align: left;
+    font-size: 15px;
+}
+
+.shop-btn .price {
+    font-size: 14px;
+    background: rgba(255, 215, 0, 0.15);
+    padding: 4px 14px;
+    border-radius: 30px;
+    color: #ffd700;
+    font-weight: 700;
+}
+
+/* Кнопки с градиентами */
+.shop-btn.upgrade {
+    background: linear-gradient(135deg, #2a1a4a, #1a0b2e);
+    border-color: rgba(180, 130, 255, 0.2);
+}
+.shop-btn.upgrade .price { background: rgba(180, 130, 255, 0.2); color: #c084fc; }
+
+.shop-btn.mega {
+    background: linear-gradient(135deg, #3a1a2a, #1a0b1e);
+    border-color: rgba(255, 100, 100, 0.2);
+}
+.shop-btn.mega .price { background: rgba(255, 100, 100, 0.2); color: #ff8a8a; }
+
+.shop-btn.energy-btn {
+    background: linear-gradient(135deg, #0a2a3a, #0a1a2a);
+    border-color: rgba(100, 200, 255, 0.2);
+}
+.shop-btn.energy-btn .price { background: rgba(100, 200, 255, 0.2); color: #7cf9ff; }
+
+/* ===== АДАПТАЦИЯ ===== */
+@media (max-width: 420px) {
+    #app { padding: 16px 14px 20px; }
+    #coinImage { width: 130px; height: 130px; }
+    .coin-glow { width: 180px; height: 180px; }
+    .shop-btn { padding: 14px 14px; font-size: 14px; }
+    .balance .value { font-size: 18px; }
+}

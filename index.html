@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>💰 Тапалка</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="app">
+        <!-- Шапка -->
+        <div class="header">
+            <div class="balance">
+                <span class="label">🪙 Монет</span>
+                <span class="value" id="coinCounter">0</span>
+            </div>
+            <div class="energy">
+                <span class="label">⚡ Энергия</span>
+                <div class="energy-bar">
+                    <div class="energy-fill" id="energyFill" style="width: 100%"></div>
+                </div>
+                <span class="value" id="energyCounter">500/500</span>
+            </div>
+        </div>
+
+        <!-- Монетка -->
+        <div class="coin-wrapper">
+            <div class="coin-glow"></div>
+            <img id="coinImage" src="https://emojicdn.elk.sh/🪙" alt="Монета" />
+            <div id="floatingTexts"></div>
+        </div>
+
+        <!-- Счётчик силы тапа -->
+        <div class="tap-power">
+            💪 Сила тапа: <span id="tapPowerDisplay">1</span>
+        </div>
+
+        <!-- Магазин -->
+        <div class="shop">
+            <button class="shop-btn upgrade" onclick="buyUpgrade(50, 1)">
+                <span class="icon">⬆️</span>
+                <span class="text">Улучшить тап</span>
+                <span class="price">50 🪙</span>
+            </button>
+            <button class="shop-btn mega" onclick="buyUpgrade(200, 5)">
+                <span class="icon">🚀</span>
+                <span class="text">Мега-тап</span>
+                <span class="price">200 🪙</span>
+            </button>
+            <button class="shop-btn energy-btn" onclick="buyEnergy(100)">
+                <span class="icon">🔋</span>
+                <span class="text">Восстановить</span>
+                <span class="price">100 🪙</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
