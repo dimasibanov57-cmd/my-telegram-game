@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: #0a0a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 10px;
+}
+
+#app {
+    max-width: 400px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 16px 14px 20px;
+    border: 1px solid rgba(255, 215, 0, 0.08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.header { margin-bottom: 12px; }
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 8px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
+.stat-label {
+    font-size: 7px;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.stat-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffd700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+}
+
+.stat-value.small { font-size: 9px; color: #7cf9ff; }
+
+.energy-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 2px 0;
+}
+
+.energy-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff, #7cf9ff);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.coin-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 6px 0 10px;
+    cursor: pointer;
+}
+
+.coin-glow {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+#coinImage {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.08s ease;
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));
+}
+
+#coinImage:active { transform: scale(0.85); }
+
+#floatingTexts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.float-text {
+    position: absolute;
+    font-size: 24px;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    animation: floatUp 0.8s forwards;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(0.7); }
+    100% { opacity: 0; transform: translateY(-110px) scale(1.4); }
+}
+
+.income-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #888;
+    padding: 4px 2px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.income-info span { font-weight: 600; }
+.income-info span:first-child span { color: #7cf9ff; }
+.income-info span:nth-child(2) span { color: #ffd700; }
+
+.tabs {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 8px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+}
+
+.tab-btn {
+    flex: 0 0 auto;
+    padding: 6px 8px;
+    border: none;
+    border-radius: 10px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #777;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    color: #fff;
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.15);
+}
+
+.tab-panel {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tab-panel.active { display: flex; }
+
+.shop-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.12s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    gap: 6px;
+    min-height: 36px;
+}
+
+.shop-btn:active { transform: scale(0.96); }
+.shop-btn .icon { font-size: 16px; width: 24px; text-align: center; }
+.shop-btn .text { flex: 1; text-align: left; font-size: 10px; line-height: 1.2; }
+.shop-btn .price { font-size: 9px; padding: 2px 8px; border-radius: 20px; font-weight: 700; white-space: nowrap; }
+
+.shop-btn.tier1 { background: linear-gradient(135deg, #2a1a4a, #1a0b2e); border-color: rgba(180, 130, 255, 0.12); }
+.shop-btn.tier1 .price { background: rgba(180, 130, 255, 0.15); color: #c084fc; }
+.shop-btn.tier2 { background: linear-gradient(135deg, #3a1a2a, #1a0b1e); border-color: rgba(255, 100, 100, 0.12); }
+.shop-btn.tier2 .price { background: rgba(255, 100, 100, 0.15); color: #ff8a8a; }
+.shop-btn.tier3 { background: linear-gradient(135deg, #1a2a3a, #0a1a2a); border-color: rgba(100, 200, 255, 0.12); }
+.shop-btn.tier3 .price { background: rgba(100, 200, 255, 0.15); color: #7cf9ff; }
+.shop-btn.tier4 { background: linear-gradient(135deg, #2a1a2a, #1a0a1a); border-color: rgba(255, 215, 0, 0.12); }
+.shop-btn.tier4 .price { background: rgba(255, 215, 0, 0.15); color: #ffd700; }
+.shop-btn.tier5 { background: linear-gradient(135deg, #3a1a3a, #1a0a1a); border-color: rgba(255, 100, 255, 0.12); }
+.shop-btn.tier5 .price { background: rgba(255, 100, 255, 0.15); color: #ff6bff; }
+.shop-btn.tier6 { background: linear-gradient(135deg, #1a1a3a, #0a0a2a); border-color: rgba(150, 100, 255, 0.12); }
+.shop-btn.tier6 .price { background: rgba(150, 100, 255, 0.15); color: #a07cff; }
+.shop-btn.tier7 { background: linear-gradient(135deg, #1a2a2a, #0a1a1a); border-color: rgba(100, 255, 200, 0.12); }
+.shop-btn.tier7 .price { background: rgba(100, 255, 200, 0.15); color: #6fdfaa; }
+.shop-btn.tier8 { background: linear-gradient(135deg, #2a1a0a, #1a0a00); border-color: rgba(255, 200, 0, 0.12); }
+.shop-btn.tier8 .price { background: rgba(255, 200, 0, 0.15); color: #ffdd00; }
+
+.shop-btn.business { background: linear-gradient(135deg, #1a2a1a, #0a1a0a); border-color: rgba(100, 255, 150, 0.1); }
+.shop-btn.business .price { background: rgba(100, 255, 150, 0.12); color: #6fdf8a; }
+
+.shop-btn.energy-buy { background: linear-gradient(135deg, #0a2a3a, #0a1a2a); border-color: rgba(100, 200, 255, 0.15); }
+.shop-btn.energy-buy .price { background: rgba(100, 200, 255, 0.15); color: #7cf9ff; }
+.shop-btn.energy-max { background: linear-gradient(135deg, #2a1a3a, #1a0a2a); border-color: rgba(180, 130, 255, 0.15); }
+.shop-btn.energy-max .price { background: rgba(180, 130, 255, 0.15); color: #c084fc; }
+.shop-btn.energy-regen { background: linear-gradient(135deg, #1a2a2a, #0a1a1a); border-color: rgba(100, 255, 200, 0.12); }
+.shop-btn.energy-regen .price { background: rgba(100, 255, 200, 0.12); color: #6fdfaa; }
+
+.shop-btn.bonus { background: linear-gradient(135deg, #2a1a2a, #1a0a1a); border-color: rgba(255, 150, 255, 0.12); }
+.shop-btn.bonus .price { background: rgba(255, 150, 255, 0.15); color: #e87ae8; }
+
+.shop-btn.prestige-btn { background: linear-gradient(135deg, #3a1a1a, #1a0a0a); border-color: rgba(255, 100, 100, 0.3); }
+.shop-btn.prestige-btn .price { background: rgba(255, 100, 100, 0.3); color: #ff6b6b; }
+
+.energy-info {
+    display: flex;
+    justify-content: space-around;
+    padding: 8px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    font-size: 11px;
+    color: #aaa;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+.energy-info span { color: #7cf9ff; font-weight: 700; }
+
+#upgradesContainer, #businessContainer {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+@media (max-width: 420px) {
+    #app { padding: 10px 8px 14px; }
+    #coinImage { width: 100px; height: 100px; }
+    .coin-glow { width: 150px; height: 150px; }
+    .stats { grid-template-columns: 1fr 1fr 1fr 1fr; padding: 5px; gap: 2px; }
+    .stat-value { font-size: 12px; }
+    .stat-label { font-size: 6px; }
+    .shop-btn { padding: 6px 8px; font-size: 10px; min-height: 30px; }
+    .shop-btn .icon { font-size: 13px; width: 20px; }
+    .shop-btn .text { font-size: 9px; }
+    .shop-btn .price { font-size: 8px; padding: 1px 6px; }
+    .tabs .tab-btn { font-size: 8px; padding: 4px 6px; }
+    .income-info { font-size: 9px; }
+}
